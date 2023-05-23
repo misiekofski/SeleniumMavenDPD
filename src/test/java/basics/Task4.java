@@ -39,5 +39,18 @@ public class Task4 extends BaseTest {
         assertThat(firstProduct).isEqualTo("Sauce Labs Fleece Jacket");
         assertThat(secondProduct).isEqualTo("Sauce Labs Backpack");
 
+        // jeszcze raz wyszukaj element
+        sortDropdownSelect = driver.findElement(By.cssSelector(".product_sort_container"));
+        select = new Select(sortDropdownSelect);
+        // bez dwóch linijek powyżej nie działa, bo strona się przeładowała
+        select.selectByValue("za");
+
+
+        productList = driver.findElements(By.cssSelector(".inventory_item_name"));
+        firstProduct = productList.get(0).getText();
+        secondProduct = productList.get(1).getText();
+
+        assertThat(firstProduct).isEqualTo("Test.allTheThings() T-Shirt (Red)");
+        assertThat(secondProduct).isEqualTo("Sauce Labs Onesie");
     }
 }
