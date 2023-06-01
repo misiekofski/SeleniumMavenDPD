@@ -15,12 +15,14 @@ import static org.assertj.core.api.Assertions.*;
 
 public class Task1 {
 
+    By categorySelectBy = By.id("combo1");
+
     @Test
     public void testBasicAjaxWeb() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://testpages.herokuapp.com/styled/basic-ajax-test.html");
 
-        WebElement categoryElement = driver.findElement(By.id("combo1"));
+        WebElement categoryElement = driver.findElement(categorySelectBy);
         Select selectCategory = new Select(categoryElement);
         selectCategory.selectByVisibleText("Web");
 
@@ -56,7 +58,7 @@ public class Task1 {
         WebDriver driver = new ChromeDriver();
         driver.get("https://testpages.herokuapp.com/styled/basic-ajax-test.html");
 
-        WebElement categoryElement = driver.findElement(By.id("combo1"));
+        WebElement categoryElement = driver.findElement(categorySelectBy);
         Select selectCategory = new Select(categoryElement);
         selectCategory.selectByVisibleText("Desktop");
 
@@ -92,7 +94,7 @@ public class Task1 {
         WebDriver driver = new ChromeDriver();
         driver.get("https://testpages.herokuapp.com/styled/basic-ajax-test.html");
 
-        WebElement categoryElement = driver.findElement(By.id("combo1"));
+        WebElement categoryElement = driver.findElement(categorySelectBy);
         Select selectCategory = new Select(categoryElement);
         selectCategory.selectByVisibleText("Server");
 
