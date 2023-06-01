@@ -23,13 +23,17 @@ public class RegisterTest {
     void userShouldRegisterSuccessfully() {
         // warunki początkowe - utwórz obiekt
         RegistrationPage regPage = new RegistrationPage(driver);
-        // rejestracja
+
+        // wygenerowanie emaila i nazwy użytkownika
         String emailAndUser = "michal+" + System.currentTimeMillis() + "@gmail.com";
 
-        regPage.registerAs(emailAndUser, emailAndUser, "password");
-        // asercja - sprawdź czy się zarejestrował
-        assertThat(regPage.getLoggedUserName())
-                .isEqualTo(emailAndUser);
+        // rejestracja
+        regPage.registerAs(emailAndUser, emailAndUser, "password")
+                .validateThatUserNameIs(emailAndUser);
+
+//        // asercja - sprawdź czy się zarejestrował
+//        assertThat(regPage.getLoggedUserName())
+//                .isEqualTo(emailAndUser);
     }
 
     @AfterClass

@@ -3,30 +3,52 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class RegistrationPage {
     private WebDriver driver;
 
+    @FindBy(css = "input[type='text']")
+    private WebElement userInput;
+
+    @FindBy(css = "input[type='email']")
+    private WebElement emailInput;
+
+    @FindBy(css = "input[type='password']")
+    private WebElement passwordInput;
+
+    @FindBy(css = "button.btn-primary")
+    private WebElement registerButton;
+
+    @FindBy(xpath = "//img[@class='user-pic']/..")
+    private WebElement registeredUser;
+
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public void registerAs(String userName, String mail, String password) {
-        WebElement userInput = driver.findElement(By.cssSelector("input[type='text']"));
+    public RegistrationPage registerAs(String userName, String mail, String password) {
         userInput.sendKeys(userName);
-
-        WebElement emailInput = driver.findElement(By.cssSelector("input[type='email']"));
         emailInput.sendKeys(mail);
-
-        WebElement passwordInput = driver.findElement(By.cssSelector("input[type='password']"));
         passwordInput.sendKeys(password);
-
-        WebElement registerButton = driver.findElement(By.cssSelector("button.btn-primary"));
         registerButton.click();
+        // strona zwraca samą siebie
+        return this;
+    }
+
+    public void innaFunkcjaWpisujacaTylkoEmail(String badEmail) {
+        emailInput.sendKeys(badEmail);
+    }
+
+    public void validateThatUserNameIs(String expectedUser) {
+        assertThat(registeredUser.getText()).isEqualTo(expectedUser);
     }
 
     public String getLoggedUserName() {
-        WebElement registeredUser = driver.findElement(By.xpath("//img[@class='user-pic']/.."));
         return registeredUser.getText();
     }
 }

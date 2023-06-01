@@ -26,9 +26,6 @@ public class Task1 {
         WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.sendKeys("secret_sauce");
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.id("ajaxBusy")));
-
         passwordInput.submit();
 
         driver.close();
